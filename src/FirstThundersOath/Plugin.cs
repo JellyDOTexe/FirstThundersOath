@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace FirstThundersOath
 {
-    [BepInPlugin(Guid, "First Thunder's Oath", "1.0.0")]
+    [BepInPlugin(Guid, "First Thunder's Oath", "1.0.1")]
     [BepInDependency(Jotunn.Main.ModGuid)]
     [BepInDependency("Therzie.Warfare", BepInDependency.DependencyFlags.SoftDependency)]
     public class Plugin : BaseUnityPlugin

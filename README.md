@@ -8,7 +8,7 @@ Made with help from Claude.
 
 ## What you get
 
-Everything is crafted at a level 2 workbench. Each piece needs wood, flint or hide, one Hard Antler and one Eikthyr trophy. Upgrades only cost the basic materials.
+Everything is crafted at a level 2 workbench. Each piece needs wood, flint or hide and one Hard Antler. Upgrades only cost the basic materials.
 
 - Firstfall - mace, 22 blunt
 - Stormfurrow - flint-edged sword, 24 slash
@@ -45,7 +45,3 @@ It adds items, so everyone on the server needs it, and so does a dedicated serve
 - Spawn names: `MaceFirstThunder`, `SwordFirstThunder`, `AxeFirstThunder`, `PikeFirstThunder`, `SledgeFirstThunder`, `AtgeirFirstThunder`, `ShieldFirstThunder`, `KnifeFirstThunder`, `SpearFirstThunder`, `BowFirstThunder`.
 - No config file yet.
 - This is one of a few biome sets I'm making. They'll each come out on their own, and as a pack once they're all done.
-
-## Source
-
-The code is in `src` and the models and textures are in `assets`. Everything here is MIT licensed.

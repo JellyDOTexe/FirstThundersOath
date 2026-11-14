@@ -33,7 +33,7 @@ namespace FirstThundersOath
         //   Bronze Buckler block 16 | Flint Knife 5/5 | Copper Knife 12/12 | Flint Spear pierce 20 | Bronze Spear pierce 35
         private static (string, int, int)[] Std(int wood, int flint, string hide, int hideAmount) => new[]
         {
-            ("Wood", wood, wood / 2), ("Flint", flint, flint / 2), (hide, hideAmount, 1), ("HardAntler", 1, 0), ("TrophyEikthyr", 1, 0)
+            ("Wood", wood, wood / 2), ("Flint", flint, flint / 2), (hide, hideAmount, 1), ("HardAntler", 1, 0)
         };
 
         private static void Storm(ItemDrop.ItemData.SharedData s)
@@ -103,7 +103,7 @@ namespace FirstThundersOath
                 Name = "Dawnring",
                 Description = "Behind split birch, the first hearth weathered the storm.",
                 Stats = s => { s.m_blockPower = 10; s.m_blockPowerPerLevel = 6; },   // Wood Shield 6 (+6), Bronze Buckler 16
-                Recipe = new[] { ("Wood", 10, 5), ("Resin", 4, 2), ("DeerHide", 4, 2), ("HardAntler", 1, 0), ("TrophyEikthyr", 1, 0) },
+                Recipe = new[] { ("Wood", 10, 5), ("Resin", 4, 2), ("DeerHide", 4, 2), ("HardAntler", 1, 0) },
             },
             new WeaponDef
             {
@@ -128,7 +128,7 @@ namespace FirstThundersOath
                 Name = "Stillbranch",
                 Description = "The quiet bend held the memory of the storm.",
                 Stats = s => { s.m_damages.m_pierce = 26; Storm(s); },   // Crude Bow 22, Finewood Bow 32
-                Recipe = new[] { ("Wood", 10, 5), ("LeatherScraps", 6, 3), ("DeerHide", 2, 1), ("HardAntler", 1, 0), ("TrophyEikthyr", 1, 0) },
+                Recipe = new[] { ("Wood", 10, 5), ("LeatherScraps", 6, 3), ("DeerHide", 2, 1), ("HardAntler", 1, 0) },
             },
         };
     }
