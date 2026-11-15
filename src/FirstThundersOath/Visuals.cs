@@ -59,16 +59,7 @@ namespace FirstThundersOath
                     SetWorld(trail.Find("base"), go.transform.TransformPoint(headStart));
                     SetWorld(trail.Find("tip"), go.transform.TransformPoint(headEnd));
                 }
-                var box = attach.GetComponentsInChildren<BoxCollider>(true).FirstOrDefault();
-                if (box != null)
-                {
-                    box.transform.SetParent(go.transform, false);
-                    box.transform.localPosition = Vector3.zero;
-                    box.transform.localRotation = Quaternion.identity;
-                    box.transform.localScale = Vector3.one;
-                    box.center = b.center;
-                    box.size = new Vector3(Mathf.Max(0.1f, b.size.x), Mathf.Max(0.05f, b.size.y), b.size.z);
-                }
+                FitCollider(attach, go, b.center, new Vector3(Mathf.Max(0.1f, b.size.x), Mathf.Max(0.05f, b.size.y), b.size.z));
 
                 return true;
             }
@@ -77,6 +68,46 @@ namespace FirstThundersOath
                 Plugin.Log.LogWarning(w.Prefab + ": custom model not applied, using " + w.CloneFrom + " visuals: " + e.Message);
                 return false;
             }
+        }
+
+        // The dropped item's collider, fitted to our model. Some bases (Bronze Spear) keep it on the vanilla mesh object,
+        // which MakeModel hides: moving that object would leave the drop with no active collider and it falls through
+        // the ground. Then a new collider goes on our model and the old one is removed.
+        private static void FitCollider(Transform attach, GameObject go, Vector3 center, Vector3 size)
+        {
+            var box = attach.GetComponentsInChildren<BoxCollider>(true).FirstOrDefault();
+            if (box == null)
+            {   // e.g. the Iron Sledge: a MeshCollider on its model; if hiding the vanilla mesh took it out, give the drop a box
+                bool live = attach.GetComponentsInChildren<Collider>(true).Any(c => !c.isTrigger && ActiveUnder(c.transform, attach));
+                if (!live)
+                {
+                    var add = go.AddComponent<BoxCollider>();
+                    add.center = center; add.size = size;
+                }
+                return;
+            }
+            if (box.GetComponent<MeshFilter>() != null || box.GetComponent<Renderer>() != null)
+            {
+                var nb = go.AddComponent<BoxCollider>();
+                nb.sharedMaterial = box.sharedMaterial;
+                UnityEngine.Object.DestroyImmediate(box);
+                box = nb;
+            }
+            else
+            {
+                box.transform.SetParent(go.transform, false);
+                box.transform.localPosition = Vector3.zero;
+                box.transform.localRotation = Quaternion.identity;
+                box.transform.localScale = Vector3.one;
+            }
+            box.center = center;
+            box.size = size;
+        }
+
+        private static bool ActiveUnder(Transform t, Transform root)
+        {
+            for (; t != null && t != root; t = t.parent) if (!t.gameObject.activeSelf) return false;
+            return true;
         }
 
         private static GameObject MakeModel(Transform attach, MeshFilter vanilla, MeshRenderer vanillaRenderer, string dir, WeaponDef w, out Mesh mesh)
@@ -130,13 +161,7 @@ namespace FirstThundersOath
             go.transform.localPosition = c - rot * (b.center * k);
             Plugin.Log.LogInfo(w.Prefab + ": vanilla shield " + vanillaDiameter.ToString("F2") + " m across, model scaled x" + k.ToString("F2"));
 
-            var box = attach.GetComponentsInChildren<BoxCollider>(true).FirstOrDefault();
-            if (box != null)
-            {
-                box.transform.SetParent(go.transform, false);
-                box.transform.localPosition = Vector3.zero; box.transform.localRotation = Quaternion.identity; box.transform.localScale = Vector3.one;
-                box.center = b.center; box.size = b.size;
-            }
+            FitCollider(attach, go, b.center, b.size);
             return true;
         }
 
