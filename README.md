@@ -45,3 +45,7 @@ It adds items, so everyone on the server needs it, and so does a dedicated serve
 - Spawn names: `MaceFirstThunder`, `SwordFirstThunder`, `AxeFirstThunder`, `PikeFirstThunder`, `SledgeFirstThunder`, `AtgeirFirstThunder`, `ShieldFirstThunder`, `KnifeFirstThunder`, `SpearFirstThunder`, `BowFirstThunder`.
 - No config file yet.
 - This is one of a few biome sets I'm making. They'll each come out on their own, and as a pack once they're all done.
+
+## Bugs
+
+Found a bug? Open an issue on [GitHub](https://github.com/JellyDOTexe/FirstThundersOath/issues) and I'll take a look.
